@@ -23,7 +23,7 @@ namespace SaitynasLab1
             services.AddControllers();
             services.AddTransient<IClansRepository, ClansRepository>();
             services.AddTransient<IMembersRepository, MembersRepository>();
-            //services.AddTransient<IPostsRepository, PostsRepository>();
+            services.AddTransient<IPostsRepository, PostsRepository>();
 
         }
 

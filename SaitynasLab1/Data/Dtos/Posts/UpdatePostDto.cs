@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace SaitynasLab1.Data.Dtos.Posts
 {
-    public record UpdatePostDto(string Body);
+    public record UpdatePostDto([Required]string Body);
 }
