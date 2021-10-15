@@ -30,7 +30,7 @@ namespace SaitynasLab1.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<PostDto>> GetAllAsync(int memberId)
+        public async Task<IEnumerable<PostDto>> GetAllAsync(int memberId)//(int clanId, int memberId)
         {
             var posts = await _postsRepository.GetAsync(memberId);
             return posts.Select(o => _mapper.Map<PostDto>(o));
@@ -39,7 +39,7 @@ namespace SaitynasLab1.Controllers
 
         //  /api/members/1/members/2/posts/3
         [HttpGet("{postId}")]
-        public async Task<ActionResult<PostDto>> GetAsync(int memberId, int postId)
+        public async Task<ActionResult<PostDto>> GetAsync(int memberId, int postId)//(int clanId, int memberId, int postId)
         {
             var post = await _postsRepository.GetAsync(memberId, postId);
             if (post == null) return NotFound($"Post with id '{postId}' not found.");
@@ -48,10 +48,15 @@ namespace SaitynasLab1.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<PostDto>> PostAsync(int memberId, CreatePostDto postDto)
+        public async Task<ActionResult<PostDto>> PostAsync(int memberId, CreatePostDto postDto)//(int clanId, int memberId, CreatePostDto postDto)
         {
+            //var clan = await _clansRepository.Get(clanId);
+            //if (clan == null) return NotFound($"Clan with id '{clanId}' not found.");
+
             var member = await _membersRepository.GetAsync(memberId);
             if (member == null) return NotFound($"Member with id '{memberId}' not found.");
+            //var member = await _membersRepository.GetAsync(clanId, memberId);
+            //if (member == null) return NotFound($"Member with id '{memberId}' not found.");
 
             var post = _mapper.Map<Post>(postDto);
             post.MemberId = memberId;
@@ -63,15 +68,24 @@ namespace SaitynasLab1.Controllers
 
 
         [HttpPut("{postId}")]
-        public async Task<ActionResult<PostDto>> PutAsync(int memberId, int postId, CreatePostDto postDto)
+        public async Task<ActionResult<PostDto>> PutAsync(int memberId, int postId, CreatePostDto postDto)//((int clanId, int memberId, int postId, CreatePostDto postDto))
         {
+
+            //var clan = await _clansRepository.Get(clanId);
+            //if (clan == null) return NotFound($"Clan with id '{clanId}' not found.");
+
             var member = await _membersRepository.GetAsync(memberId);
             if (member == null) return NotFound($"Member with id '{memberId}' not found.");
+
+            // var member = await _membersRepository.GetAsync(clanId, memberId);
+            //if (member == null) return NotFound($"Member with id '{memberId}' not found.");
 
             var oldPost = await _postsRepository.GetAsync(memberId, postId);
             if (oldPost == null) return NotFound();
 
-            //
+            // var oldPost = await _postsRepository.GetAsync(clanId, memberId, postId);
+            //if (oldPost == null) return NotFound();
+
             _mapper.Map(postDto, oldPost);
 
             await _postsRepository.UpdateAsync(oldPost);

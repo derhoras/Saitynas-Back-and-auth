@@ -15,7 +15,8 @@ namespace SaitynasLab1.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=RestDemo");
+            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=RestDemo");
+            optionsBuilder.UseSqlServer("Server=tcp:saitynaslab1dbserver.database.windows.net,1433;Initial Catalog=SaitynasLab1_db2;Persist Security Info=False;User ID=juslaz2;Password=Petras123%;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
     }
 }

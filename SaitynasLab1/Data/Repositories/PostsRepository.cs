@@ -23,14 +23,19 @@ namespace SaitynasLab1.Data.Repositories
         {
             _demoRestContext = demoRestContext;
         }
-        public async Task<Post> GetAsync(int memberId, int postId)
+        //public async Task<Post> GetAsync(int memberId, int postId)
+        public async Task<Post> GetAsync(int clandId, int memberId, int postId)
         {
-            return await _demoRestContext.Posts.FirstOrDefaultAsync(o => o.MemberId == memberId && o.Id == postId);
+            //return await _demoRestContext.Posts.FirstOrDefaultAsync(o => o.MemberId == memberId && o.Id == postId);
+            return await _demoRestContext.Posts.FirstOrDefaultAsync(o => o.MemberId == memberId && o.Id == postId && o.Memb ClanId);
         }
 
         public async Task<List<Post>> GetAsync(int memberId)
+        //public async Task<List<Post>> GetAsync(int clandId, int memberId)
         {
             return await _demoRestContext.Posts.Where(o => o.MemberId == memberId).ToListAsync();
+            //return await _demoRestContext.Posts.Where(o => o.MemberId == memberId).ToListAsync();
+
         }
 
         public async Task InsertAsync(Post post)
