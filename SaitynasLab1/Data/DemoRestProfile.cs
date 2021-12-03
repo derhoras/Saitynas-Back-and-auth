@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using SaitynasLab1.Data.Dtos.Auth;
 using SaitynasLab1.Data.Repositories;
 using SaitynasLab1.Data.Entities;
 using SaitynasLab1.Data.Dtos.Clans;
@@ -26,6 +27,8 @@ namespace SaitynasLab1.Data
             CreateMap<Post, PostDto>();
             CreateMap<CreatePostDto, Post>();
             CreateMap<UpdatePostDto, Post>();
+
+            CreateMap<SaitynasUser, UserDto>();
         }
     }
 }

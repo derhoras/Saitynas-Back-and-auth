@@ -5,5 +5,5 @@ using System.Threading.Tasks;
 
 namespace SaitynasLab1.Data.Dtos.Clans
 {
-    public record ClanDto(int Id, string Name, string Description);
+    public record ClanDto(int Id, string Name, string Description, string UserId);
 }
